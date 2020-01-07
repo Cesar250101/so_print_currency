@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="report_orden_compra">
-        <t t-name="po_print_curency.report_orden_compra">
-        <t t-name="report_orden_compra">
+    <template id="report_sale_order">
+        <t t-name="so_print_currency.report_sale_order">
+        <t t-name="report_sale_order">
             <t t-call="web.external_layout">
                 <t t-foreach="docs" t-as="o">
                         <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>

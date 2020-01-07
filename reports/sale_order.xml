@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="formato_general" model="report.paperformat">
+        <record id="formato_carta" model="report.paperformat">
 		    <field name="name">General</field>
 		    <field name="default" eval="True"/>
-		    <field name="format">A4</field>
+		    <field name="format">Letter</field>
 		    <field name="orientation">Portrait</field>
 		    <field name="margin_top">30</field>
 		    <field name="margin_bottom">25</field>
@@ -14,13 +14,13 @@
 		</record>
 
        	<report
-       		id="contrato_trabajo"
-       		string="Imprimir Órden de Compra - Moneda Adicional"
-       		model="purchase.order"
+       		id="sale_order_currency"
+       		string="Imprimir Notas de Venta - Moneda Adicional"
+       		model="sale.order"
        		report_type="qweb-html"
-       		name="po_print_currency.report_orden_compra"
-            file="po_print_currency.report_orden_compra"
-            paperformat="formato_general"/>
+       		name="so_print_currency.report_sale_order"
+            file="so_print_currency.report_sale_order"
+            paperformat="formato_carta"/>
 
     </data>
 </odoo>

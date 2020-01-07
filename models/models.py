@@ -3,8 +3,8 @@
 from odoo import models, fields, api
 from datetime import datetime, date, time, timedelta
 
-class ImprimirOrdenCompra(models.Model):
-    _inherit = 'purchase.order'
+class ImprimirNotaVenta(models.Model):
+    _inherit = 'sale.order'
 
     imprimir_moneda_extranjera = fields.Boolean(string="Imprimir en moneda extranjera",  )
     moneda_adic = fields.Many2one(comodel_name="res.currency", string="Moneda Adicional", required=False, )

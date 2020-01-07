@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "po_print_currency",
+    'name': "so_print_currency",
 
     'summary': """
-        Extanción para poder imprimir ordenes de compra en una moneda extranjera""",
+        Extanción para poder imprimir notas de venta en una moneda extranjera""",
 
     'description': """
-        Imprimir orden de compra en la moneda extranajera seleccionada
+        Imprimir notas de venta en la moneda extranajera seleccionada
     """,
 
     'author': "Method",
@@ -26,6 +26,8 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'reports/sale_order.xml',
+        'reports/sale_order_template.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
