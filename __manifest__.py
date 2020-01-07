@@ -3,15 +3,14 @@
     'name': "po_print_currency",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Extanción para poder imprimir ordenes de compra en una moneda extranjera""",
 
     'description': """
-        Long description of module's purpose
+        Imprimir orden de compra en la moneda extranajera seleccionada
     """,
 
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
+    'author': "Method",
+    'website': "http://www.openmethod.cl",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/11.0/odoo/addons/base/module/module_data.xml
@@ -20,7 +19,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','purchase'],
 
     # always loaded
     'data': [
