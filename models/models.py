@@ -7,7 +7,7 @@ class ImprimirNotaVenta(models.Model):
     _inherit = 'sale.order'
 
     imprimir_moneda_extranjera = fields.Boolean(string="Imprimir en moneda extranjera",  )
-    moneda_adic = fields.Many2one(comodel_name="res.currency", string="Moneda Adicional", required=False, )
+    moneda_adic = fields.Many2one(comodel_name="res.currency", string="Moneda Adicional", required=False, default=46)
     tasa_cambio = fields.Float(string="Tasa de Cambio",  required=False, store=True)
 
     @api.model
