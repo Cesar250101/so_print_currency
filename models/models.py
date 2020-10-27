@@ -10,21 +10,21 @@ class ImprimirNotaVenta(models.Model):
     moneda_adic = fields.Many2one(comodel_name="res.currency", string="Moneda Adicional", required=False, default=46)
     tasa_cambio = fields.Float(string="Tasa de Cambio",  required=False, store=True)
 
-    # @api.model
-    # @api.onchange('moneda_adic')
-    # def _onchange_moneda_Adic(self):
-    #     if self.tasa_cambio in(1,0):
-    #         tasacambio=1
-    #         if self.date_order:
-    #             strfecha=self.date_order[0:10]
-    #         else:
-    #             strfecha=date.today()
-    #         paridades=self.env["res.currency.rate"].search([('currency_id','=',self.moneda_adic.id)])
-    #         for i in paridades:
-    #             if i.name:
-    #                 if i.name==strfecha:
-    #                     tasacambio=i.inverse_rate
-    #                 else:
-    #                     tasacambio =1
-    #         self.tasa_cambio=tasacambio
+    @api.model
+    @api.onchange('moneda_adic')
+    def _onchange_moneda_Adic(self):
+        if self.tasa_cambio in(1,0):
+            tasacambio=1
+            if self.date_order:
+                strfecha=self.date_order[0:10]
+            else:
+                strfecha=date.today()
+            paridades=self.env["res.currency.rate"].search([('currency_id','=',self.moneda_adic.id)])
+            for i in paridades:
+                if i.name:
+                    if i.name==strfecha:
+                        tasacambio=i.inverse_rate
+                    else:
+                        tasacambio =1
+            self.tasa_cambio=tasacambio
 
