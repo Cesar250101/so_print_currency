@@ -16,6 +16,7 @@ class ImprimirNotaVenta(models.Model):
         if self.tasa_cambio in(1,0):
             tasacambio=1
             if self.date_order:
+                strfecha = str(self.date_order)
                 strfecha=self.date_order[0:10]
             else:
                 strfecha=date.today()
