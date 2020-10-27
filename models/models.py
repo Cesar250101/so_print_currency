@@ -29,5 +29,6 @@ class ImprimirNotaVenta(models.Model):
                         tasacambio=i.inverse_rate
                     else:
                         tasacambio =1
-            self.tasa_cambio=tasacambio
+            #self.tasa_cambio=tasacambio
+            self.tasa_cambio = strfecha
 
