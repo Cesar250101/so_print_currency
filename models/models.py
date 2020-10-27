@@ -28,3 +28,13 @@ class ImprimirNotaVenta(models.Model):
                         tasacambio =1
             self.tasa_cambio=tasacambio
 
+class NewModule(models.Model):
+    _inherit = 'sale.order'
+
+    subtotal_moneda_local = fields.Integer(
+        string='Subtotal Moneda Local',
+        required=False)
+
+    @api.onchange('order_line','tasa_cambio')
+    def _onchange_subtotal_local(self):
+        return self.subtotal_moneda_local=self.amount_untaxed*self.tasa_cambio
