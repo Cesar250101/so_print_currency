@@ -23,7 +23,7 @@
         <field name="inherit_id" ref="sale.view_quotation_tree"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='field']" position="after">
+            <xpath expr="//field[@name='user_id']" position="after">
                 <field name="subtotal_moneda_local" sum="SubTotal Moneda Local" widget="monetary"/>
             </xpath>
 
