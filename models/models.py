@@ -12,9 +12,14 @@ class ImprimirNotaVenta(models.Model):
 
     @api.model
     @api.onchange('moneda_adic')
-    def _onchange_moneda_Adic(self):
+    def _onchange_moneda_Adic(self, dt_util=None):
         if self.tasa_cambio in(1,0):
             tasacambio=1
+            if isinstance(self.date_order, int):
+                fc_date = dt_util.as_local(datetime.utcfromtimestamp(
+                    self.date_order / 1000)).isoformat()
+            elif isinstance(self.date_order, datetime):
+                fc_date = dt_util.as_local(self.date_order).isoformat()
             if self.date_order:
                 strfecha=self.date_order[10]
             else:
