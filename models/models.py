@@ -34,3 +34,22 @@ class ImprimirNotaVenta(models.Model):
                     else:
                         tasacambio =1
             self.tasa_cambio=tasacambio
+
+class NewModule(models.Model):
+    _inherit = 'sale.order.line'
+
+    precio_moneda_local = fields.Integer(
+        string='Precio Moneda Local',compute="_compute_precio_moneda_local",
+        required=False)
+    subtotal_moneda_local = fields.Integer(
+        string='Precio Moneda Local',compute="_compute_subtotal_moneda_local",
+        required=False)
+
+    @api.multi
+    @api.depends('order_id.tasa_cambio')
+    def _compute_precio_moneda_local(self):
+        self.precio_moneda_local=self.order_id.tasa_cambio*self.price_unit
+    @api.multi
+    @api.depends('order_id.tasa_cambio','product_uom_qty','price_unit')
+    def _compute_subtotal_moneda_local(self):
+        self.subtotal_moneda_local=self.order_id.tasa_cambio*self.price_unit*self.product_uom_qty
