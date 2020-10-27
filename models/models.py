@@ -15,10 +15,10 @@ class ImprimirNotaVenta(models.Model):
     def _onchange_moneda_Adic(self):
         if self.tasa_cambio in(1,0):
             tasacambio=1
-            if self.date_order:
-                strfecha=self.date_order[0:10]
-            else:
-                strfecha=date.today()
+            #if self.date_order:
+            #    strfecha=self.date_order[0:10]
+            #else:
+            strfecha=date.today()
             paridades=self.env["res.currency.rate"].search([('currency_id','=',self.moneda_adic.id)])
             for i in paridades:
                 if i.name:
