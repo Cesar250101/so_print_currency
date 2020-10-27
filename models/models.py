@@ -9,6 +9,13 @@ class ImprimirNotaVenta(models.Model):
     imprimir_moneda_extranjera = fields.Boolean(string="Imprimir en moneda extranjera",  )
     moneda_adic = fields.Many2one(comodel_name="res.currency", string="Moneda Adicional", required=False, default=46)
     tasa_cambio = fields.Float(string="Tasa de Cambio",  required=False, store=True)
+    subtotal_moneda_local = fields.Integer(
+        string='Subtotal Moneda Local',
+        required=False)
+
+    @api.onchange('order_line','tasa_cambio')
+    def _onchange_subtotal_local(self):
+        return self.subtotal_moneda_local = self.amount_untaxed*self.tasa_cambio
 
     @api.model
     @api.onchange('moneda_adic')
@@ -27,14 +34,3 @@ class ImprimirNotaVenta(models.Model):
                     else:
                         tasacambio =1
             self.tasa_cambio=tasacambio
-
-class NewModule(models.Model):
-    _inherit = 'sale.order'
-
-    subtotal_moneda_local = fields.Integer(
-        string='Subtotal Moneda Local',
-        required=False)
-
-    @api.onchange('order_line','tasa_cambio')
-    def _onchange_subtotal_local(self):
-        return self.subtotal_moneda_local=self.amount_untaxed*self.tasa_cambio

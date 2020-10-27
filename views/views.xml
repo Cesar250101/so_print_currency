@@ -10,7 +10,7 @@
             <xpath expr="//field[@name='payment_term_id']" position="after">
                 <field name="moneda_adic"/>
                 <field name="tasa_cambio"/>
-                <field name="subtotal_moneda_local" sum="SubTotal Moneda Local" widget="monetary" invisible="1"/>
+<!--                <field name="subtotal_moneda_local" sum="SubTotal Moneda Local" widget="monetary" invisible="1"/>-->
             </xpath>
 
 
