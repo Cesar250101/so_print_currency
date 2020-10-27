@@ -18,7 +18,7 @@ class ImprimirNotaVenta(models.Model):
             if self.date_order:
                 strfecha = self.date_order
                 strfecha.strftime("%d/%m/%Y")
-                strfecha=strfecha[0:10]
+                #strfecha=strfecha[0:10]
             else:
                 strfecha=date.today()
 
