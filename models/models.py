@@ -16,8 +16,7 @@ class ImprimirNotaVenta(models.Model):
         if self.tasa_cambio in(1,0):
             tasacambio=1
             if self.date_order:
-                strfecha = str(self.date_order)
-                strfecha=strfecha[0:10]
+                strfecha=self.date_order[10]
             else:
                 strfecha=date.today()
             paridades=self.env["res.currency.rate"].search([('currency_id','=',self.moneda_adic.id)])
