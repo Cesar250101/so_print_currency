@@ -15,7 +15,7 @@ class ImprimirNotaVenta(models.Model):
 
     @api.onchange('order_line','tasa_cambio')
     def _onchange_subtotal_local(self):
-        return self.subtotal_moneda_local = self.amount_untaxed*self.tasa_cambio
+        self.subtotal_moneda_local = self.amount_untaxed*self.tasa_cambio
 
     @api.model
     @api.onchange('moneda_adic')
