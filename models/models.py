@@ -12,18 +12,16 @@ class ImprimirNotaVenta(models.Model):
 
     @api.model
     @api.onchange('moneda_adic')
-    def _onchange_moneda_Adic(self, dt_util=None):
+    def _onchange_moneda_Adic(self):
         if self.tasa_cambio in(1,0):
             tasacambio=1
-            if isinstance(self.date_order, int):
-                fc_date = dt_util.as_local(datetime.utcfromtimestamp(
-                    self.date_order / 1000)).isoformat()
-            elif isinstance(self.date_order, datetime):
-                fc_date = dt_util.as_local(self.date_order).isoformat()
             if self.date_order:
-                strfecha=self.date_order[10]
+                strfecha = self.date_order
+                strfecha.strftime("%d/%m/%Y")
+                strfecha=strfecha[0:10]
             else:
                 strfecha=date.today()
+
             paridades=self.env["res.currency.rate"].search([('currency_id','=',self.moneda_adic.id)])
             for i in paridades:
                 if i.name:
