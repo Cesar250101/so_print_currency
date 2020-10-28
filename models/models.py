@@ -9,13 +9,7 @@ class ImprimirNotaVenta(models.Model):
     imprimir_moneda_extranjera = fields.Boolean(string="Imprimir en moneda extranjera",  )
     moneda_adic = fields.Many2one(comodel_name="res.currency", string="Moneda Adicional", required=False, default=46)
     tasa_cambio = fields.Float(string="Tasa de Cambio",  required=False, store=True)
-    subtotal_moneda_local = fields.Integer(
-        string='Subtotal Moneda Local',
-        required=False)
 
-    @api.onchange('order_line','tasa_cambio')
-    def _onchange_subtotal_local(self):
-        self.subtotal_moneda_local = self.amount_untaxed*self.tasa_cambio
 
     @api.model
     @api.onchange('moneda_adic')
@@ -35,21 +29,21 @@ class ImprimirNotaVenta(models.Model):
                         tasacambio =1
             self.tasa_cambio=tasacambio
 
-class NewModule(models.Model):
+class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    precio_moneda_local = fields.Integer(
-        string='Precio Moneda Local',compute="_compute_precio_moneda_local",
+    price_unit = fields.Float(
+        string='Precio Unitario',
         required=False)
-    subtotal_moneda_local = fields.Integer(
-        string='Precio Moneda Local',compute="_compute_subtotal_moneda_local",
+    precio_moneda_adicional = fields.Integer(
+        string='Precio Moneda Adicional',
         required=False)
+    tasa_cambio_linea = fields.Float(string="Tasa de Cambio", required=False, store=True, related="order_id.tasa_cambio")
 
-    @api.multi
-    @api.depends('order_id.tasa_cambio')
-    def _compute_precio_moneda_local(self):
-        self.precio_moneda_local=self.order_id.tasa_cambio*self.price_unit
-    @api.multi
-    @api.depends('order_id.tasa_cambio','product_uom_qty','price_unit')
-    def _compute_subtotal_moneda_local(self):
-        self.subtotal_moneda_local=self.order_id.tasa_cambio*self.price_unit*self.product_uom_qty
+
+
+    @api.onchange('precio_moneda_adicional','product_uom_qty')
+    def _onchange_price_unit(self):
+        if self.order_id.tasa_cambio!=1:
+            self.price_unit=self.precio_moneda_adicional*self.order_id.tasa_cambio
+

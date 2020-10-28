@@ -10,25 +10,14 @@
             <xpath expr="//field[@name='payment_term_id']" position="after">
                 <field name="moneda_adic"/>
                 <field name="tasa_cambio"/>
-                <field name="subtotal_moneda_local" sum="SubTotal Moneda Local" widget="monetary" invisible="1"/>
             </xpath>
 
-
-        </field>
-    </record>
-
-    <record id="so_print_currency.view_quotation_tree" model="ir.ui.view">
-        <field name="name">soprint.currency.view.quotation.tree</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_quotation_tree"/>
-        <field name="arch" type="xml">
-
-            <xpath expr="//field[@name='user_id']" position="after">
-                <field name="subtotal_moneda_local" sum="SubTotal Moneda Local" widget="monetary"/>
+            <xpath expr="//tree/field[@name='price_unit']" position="before">
+                <field name="tasa_cambio_linea" invisible="1"/>
+                <field name="precio_moneda_adicional" attrs="{'invisible': [('tasa_cambio_linea', '=', 1)]}"/>
             </xpath>
 
         </field>
     </record>
-
   </data>
 </odoo>
