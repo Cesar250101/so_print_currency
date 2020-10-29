@@ -35,8 +35,9 @@ class SaleOrderLine(models.Model):
     price_unit = fields.Float(
         string='Precio Unitario',
         required=False)
-    precio_moneda_adicional = fields.Integer(
-        string='Precio Moneda Adicional',
+
+    precio_moneda_adicional = fields.Float(
+        string='Precio Moneda Adicional',relate="product_id.product_tmpl_id.lst_price",
         required=False)
     tasa_cambio_linea = fields.Float(string="Tasa de Cambio", required=False, store=True, related="order_id.tasa_cambio")
 
