@@ -16,6 +16,11 @@
                 <field name="tasa_cambio_linea" invisible="1"/>
                 <field name="precio_moneda_adicional" attrs="{'invisible': [('tasa_cambio_linea', '=', 1)]}"/>
             </xpath>
+            <xpath expr="//form/field[@name='price_unit']" position="before">
+                <field name="tasa_cambio_linea" invisible="1"/>
+                <field name="precio_moneda_adicional" attrs="{'invisible': [('tasa_cambio_linea', '=', 1)]}"/>
+            </xpath>
+
 
         </field>
     </record>
