@@ -8,7 +8,7 @@ class ImprimirNotaVenta(models.Model):
 
     imprimir_moneda_extranjera = fields.Boolean(string="Imprimir en moneda extranjera",  )
     moneda_adic = fields.Many2one(comodel_name="res.currency", string="Moneda Adicional", required=False, default=46)
-    tasa_cambio = fields.Float(string="Tasa de Cambio",  required=False, store=True)
+    tasa_cambio = fields.Float(string="Tasa de Cambio", related="moneda_adic.inverse_rate" ,required=False, store=True)
 
 
     @api.model
